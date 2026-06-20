@@ -1,0 +1,28 @@
+.vscode/
+adata_for_vitessc.zarr/
+bak/
+data/
+scripts/
+!scripts/export_prognosis_target_field_ids.py
+baselines/
+CLAUDE.md
+AGENTS.md
+logs/
+
+# Python / env
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Run artifacts
+wandb/
+outputs/
+checkpoints/
+lightning_logs/
+artifacts/
+
+# Data
+*.h5ad

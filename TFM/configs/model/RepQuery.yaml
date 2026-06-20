@@ -1,0 +1,64 @@
+# @package _global_
+#
+# RepQuery defaults. These reproduce the published ("submission") configuration,
+# so `python train.py model=RepQuery` runs the best known setup without extra
+# command-line overrides.
+defaults:
+  - _self_
+
+# General
+model_name: "RepQuery"
+mean_impute: False
+epochs: 300                 # upper cap; early stopping (patience 20 on val loss) usually halts earlier
+batch_size: 512
+mini_batch_size: 128
+
+# Encoder architecture
+n_layers: 1
+hidden_dim: 64
+num_heads: 4
+attention_dropout: 0.1
+ffn_hidden_dim_multiplier: 4
+ffn_dropout: 0.1
+
+# Decoder architecture
+decoder_n_layers: 1
+decoder_hidden_dim: 64      # forced to match hidden_dim for RepQuery at runtime
+decoder_num_heads: 4
+decoder_attention_dropout: 0.01
+decoder_ffn_hidden_dim_multiplier: 2
+decoder_ffn_dropout: 0.01
+
+# Query (CLS) tokens
+n_cls_tokens: 64
+
+# Optimizer & Scheduler
+lr: 0.003
+
+# Task / targets
+target_outcomes: []
+task: "PROGNOSIS"
+icd_hierarchy_level: [3]
+include_gp: all
+disable_meds: false
+
+# RepQuery temporal sampling (metric-aligned mixture)
+# With probability `temporal_fixed_horizon_p`, sample query times from
+# `temporal_fixed_horizons_months` (optionally jittered), otherwise fall back
+# to `temporal_sampling_strategy`.
+temporal_sampling_strategy: DIAG_CENTERED      # UNIFORM | GAUSSIAN | DIAG_CENTERED
+temporal_sampling_std_months: 12.0             # used only for "gaussian"
+temporal_sampling_max_months: null             # e.g. 120 to train flexible horizons up to 10y
+temporal_fixed_horizon_p: 0.0                  # 0 disables fixed-horizon sampling
+temporal_fixed_horizons_months: []             # e.g. [24, 60, 120]
+temporal_fixed_horizon_jitter_months: 0        # e.g. 1 for ±1 month jitter
+
+# RepQuery dropout
+feature_dropout_p: 0.0
+structured_feature_dropout_p: 0.0
+structured_feature_dropout_keep_path:
+modality_dropout_p: 0.6
+modality_dropout_groups_dir: configs/vars_to_keep/modality_groups
+modality_dropout_protected_path: configs/vars_to_keep/modality_groups/ehr_only.txt
+modality_dropout_icd_group_name: "disease_history_only"
+modality_dropout_meds_group_name: "medications_only"

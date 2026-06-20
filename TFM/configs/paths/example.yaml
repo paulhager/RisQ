@@ -1,0 +1,39 @@
+# @package _global_
+#
+# Template paths config.
+#   1. Copy this file:  cp configs/paths/example.yaml configs/paths/<your_name>.yaml
+#   2. Fill in the four machine-specific values in the section below.
+#   3. Launch with:     python train.py paths=<your_name>
+#
+defaults:
+  - _self_
+
+# A short label for this paths config (used in logging). Set it to <your_name>.
+paths_name: "example"
+
+# ----------------------------------------------------------------------------
+# FILL THESE IN (machine-specific)
+# ----------------------------------------------------------------------------
+
+# Directory containing the input AnnData (.h5ad) file.
+data_root_path: ""        # e.g. "/path/to/dataset/complete"
+
+# Where Weights & Biases run metadata is written.
+wandb_dir_path: ""        # e.g. "/path/to/wandb"
+
+# Where model checkpoints are written.
+checkpoint_dir_path: ""   # e.g. "/path/to/checkpoints"
+
+# Number of dataloader workers (tune to your machine's CPU count).
+num_workers: 8
+
+# ----------------------------------------------------------------------------
+# REPO DEFAULTS (usually leave as-is)
+# ----------------------------------------------------------------------------
+
+# Input AnnData filename inside data_root_path.
+target_file_name: all_selected_inputs_assessment0_eid_index_targets_preprocessed_gqnorm_filtered.h5ad
+
+# Modality-dropout group files (relative to the repo; run train.py from TFM/).
+modality_dropout_groups_dir: configs/vars_to_keep/modality_groups
+modality_dropout_protected_path: configs/vars_to_keep/modality_groups/ehr_only.txt

@@ -1,0 +1,16 @@
+defaults:
+  - base_config
+  - model: RepQuery
+  - _self_
+  - paths: example
+
+## Weights and Biases ##
+use_wandb: True
+# W&B entity (team/user). Leave empty to use your logged-in account's default
+# entity, or set it here / via the WANDB_ENTITY environment variable.
+wandb_entity:
+wandb_project_name: RisQ
+wandb_mode: online
+wandb_run_name:
+
+target_file_name: all_selected_inputs_assessment0_eid_index_targets_preprocessed_gqnorm_filtered.h5ad
