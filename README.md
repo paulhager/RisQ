@@ -12,7 +12,7 @@ RepQuery encodes all available patient data (lifestyle, blood biomarkers, geneti
 # 1. Install uv (https://docs.astral.sh/uv/)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 2. Install dependencies (run from this TFM/ directory)
+# 2. Install dependencies (run from this directory)
 uv sync
 
 # 3. Create your paths config and fill in the data/output directories
@@ -41,10 +41,10 @@ The sections below cover each step in detail, the available models, and the main
    curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
 
-2. **Clone the repository and enter the TFM directory**:
+2. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd foundational-ukb/TFM
+   cd RisQ
    ```
 
 3. **Create the virtual environment and install dependencies**:
@@ -116,7 +116,7 @@ num_workers: 8
 
 Then launch with `paths=mymachine`.
 
-> **Note:** Hydra changes the working directory at launch by default. Run `train.py` from the `TFM/` directory so the relative modality-dropout paths in your paths config resolve, or pass absolute paths for `modality_dropout_groups_dir` / `modality_dropout_protected_path`.
+> **Note:** Hydra changes the working directory at launch by default. Run `train.py` so the relative modality-dropout paths in your paths config resolve, or pass absolute paths for `modality_dropout_groups_dir` / `modality_dropout_protected_path`.
 
 ---
 
